@@ -6,7 +6,7 @@ use App\Http\Controllers\API\AttendanceController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\MemberMembershipController;
 use App\Http\Controllers\API\MembershipController;
-use App\Http\Controllers\API\TrainerAssignment;
+use App\Http\Controllers\API\TrainerAssignmentController;
 use App\Http\Controllers\API\WorkoutController;
 
 
@@ -44,10 +44,17 @@ Route::put('/memberships/{id}',[MembershipController::class,'update']);
 Route::delete('/memberships/{id}',[MembershipController::class,'destroy']);
 
 
+Route::get('/trainerAssignments',[TrainerAssignmentController::class,'index']);
+Route::post('/trainerAssignments',[TrainerAssignmentController::class,'store']);
+Route::put('/trainerAssignments/{id}',[TrainerAssignmentController::class,'update']);
+Route::delete('/trainerAssignments/{id}',[TrainerAssignmentController::class,'destroy']);
 
 
 
-
+Route::get('/workouts',[WorkoutController::class,'index']);
+Route::post('/workouts',[WorkoutController::class,'store']);
+Route::put('/workouts/{id}',[WorkoutController::class,'update']);
+Route::delete('/workouts/{id}',[WorkoutController::class,'destroy']);
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
