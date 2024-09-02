@@ -24,37 +24,41 @@ use App\Http\Controllers\API\WorkoutController;
 |
 */
 
-Route::get('/attendances',[AttendanceController::class,'index']);
-Route::post('/attendances',[AttendanceController::class,'store']);
-Route::put('/attendances/{id}', [AttendanceController::class, 'update']);
-Route::delete('/attendances/{id}', [AttendanceController::class, 'destroy']);
+Route::middleware('auth:sanctum')->get('/attendances',[AttendanceController::class,'index']);
+Route::middleware('auth:sanctum')->post('/attendances',[AttendanceController::class,'store']);
+Route::middleware('auth:sanctum')->put('/attendances/{id}', [AttendanceController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/attendances/{id}', [AttendanceController::class, 'destroy']);
 
 
 
-Route::get('/memberMemberships',[MemberMembershipController::class,'index']);
-Route::post('/memberMemberships',[MemberMembershipController::class,'store']);
-Route::put('/memberMemberships/{id}',[MemberMembershipController::class,'update']);
-Route::delete('/memberMemberships/{id}',[MemberMembershipController::class,'destroy']);
+Route::middleware('auth:sanctum')->get('/memberMemberships',[MemberMembershipController::class,'index']);
+Route::middleware('auth:sanctum')->post('/memberMemberships',[MemberMembershipController::class,'store']);
+Route::middleware('auth:sanctum')->put('/memberMemberships/{id}',[MemberMembershipController::class,'update']);
+Route::middleware('auth:sanctum')->delete('/memberMemberships/{id}',[MemberMembershipController::class,'destroy']);
 
 
 
 Route::get('/memberships',[MembershipController::class,'index']);
-Route::post('/memberships',[MembershipController::class,'store']);
-Route::put('/memberships/{id}',[MembershipController::class,'update']);
-Route::delete('/memberships/{id}',[MembershipController::class,'destroy']);
+Route::middleware('auth:sanctum')->post('/memberships',[MembershipController::class,'store']);
+Route::middleware('auth:sanctum')->put('/memberships/{id}',[MembershipController::class,'update']);
+Route::middleware('auth:sanctum')->delete('/memberships/{id}',[MembershipController::class,'destroy']);
 
 
 Route::get('/trainerAssignments',[TrainerAssignmentController::class,'index']);
-Route::post('/trainerAssignments',[TrainerAssignmentController::class,'store']);
-Route::put('/trainerAssignments/{id}',[TrainerAssignmentController::class,'update']);
-Route::delete('/trainerAssignments/{id}',[TrainerAssignmentController::class,'destroy']);
+Route::middleware('auth:sanctum')->post('/trainerAssignments',[TrainerAssignmentController::class,'store']);
+Route::middleware('auth:sanctum')->put('/trainerAssignments/{id}',[TrainerAssignmentController::class,'update']);
+Route::middleware('auth:sanctum')->delete('/trainerAssignments/{id}',[TrainerAssignmentController::class,'destroy']);
 
 
 
 Route::get('/workouts',[WorkoutController::class,'index']);
-Route::post('/workouts',[WorkoutController::class,'store']);
-Route::put('/workouts/{id}',[WorkoutController::class,'update']);
-Route::delete('/workouts/{id}',[WorkoutController::class,'destroy']);
+Route::middleware('auth:sanctum')->post('/workouts',[WorkoutController::class,'store']);
+Route::middleware('auth:sanctum')->put('/workouts/{id}',[WorkoutController::class,'update']);
+Route::middleware('auth:sanctum')->delete('/workouts/{id}',[WorkoutController::class,'destroy']);
+
+
+Route::post('/register',[AuthController::class,'register']);
+Route::post('/login',[AuthController::class,'login']);
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

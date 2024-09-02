@@ -4,62 +4,62 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Auth;
+use App\Http\Requests\RegistrationRequest;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function register(RegistrationRequest $request){
+
+        $user = User::where('email',$request->email)->first();
+
+        
+            $user = new User();
+            $user->name = $request->get('name');
+            $user->email = $request->get('email');
+            $user->role = $request->get('role');
+            $user->phone = $request->get('phone');
+            $user->password = bcrypt($request->password);
+            $user->save();
+
+
+            $token = $user->createToken('authToken')->plainTextToken;
+
+            return response()->json([
+                'status'=>true,
+                'message'=>'User created successfully',
+                'userToken'=>$token,
+                'data'=>$user
+            ]);
+         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    public function login(Request $request){
+        
+        $credentials = $request->only(['email','password','role']);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if(Auth::attempt($credentials)){
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+            $user = Auth::user();
+            $token = $user->createToken('authToken')->plainTextToken;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+            return response()->json([
+                'status'=>true,
+                'token'=>$token,
+                'message'=>'User logged in successfully',
+                'data'=>$user
+            ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+
+        }else {
+            return response()->json([
+                'status'=>false,
+                'message'=>'wrong email or password'
+            ]);
+        };
+
+
     }
 }

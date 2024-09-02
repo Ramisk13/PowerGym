@@ -6,12 +6,11 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Workout;
+use App\Models\User;
 
 class WorkoutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $workouts = Workout :: all();
@@ -23,18 +22,12 @@ class WorkoutController extends Controller
 
     public function store(Request $request)
     {
-        if (!in_array($user->role, ['trainer', 'admin'])) {
-            return response()->json([
-                'status' => false,
-                'message' => 'You are not authorized to add a new workout'
-            ], 403);
-        }
-    
-        // Validate the incoming request
+
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'duration' => 'required|integer|min:1', 
+            'duration' => 'required', 
         ]);
     
         if ($validator->fails()) {
@@ -43,14 +36,13 @@ class WorkoutController extends Controller
             ], 422);
         }
     
-        // Create a new Workout record
+      
         $workout = Workout::create([
             'name' => $request->name,
             'description' => $request->description,
             'duration' => $request->duration,
         ]);
     
-        // Return a success response
         return response()->json([
             'status' => true,
             'message' => 'Workout created successfully',
@@ -64,14 +56,66 @@ class WorkoutController extends Controller
 
     public function update(Request $request, string $id)
     {
-        //
+       
+    
+        
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|required|string|max:255',
+            'description' => 'sometimes|required|string',
+            'duration' => 'sometimes|required', 
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+    
+        
+        $workout = Workout::find($id);
+    
+        if (!$workout) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Workout not found'
+            ], 404);
+        }
+    
+        
+        $workout->update($request->only(['name', 'description', 'duration']));
+    
+        
+        return response()->json([
+            'status' => true,
+            'message' => 'Workout updated successfully',
+            'data' => $workout
+        ], 200);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+
+
+    
     public function destroy(string $id)
     {
-        //
+       
+        $workout = Workout::find($id);
+    
+        if (!$workout) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Workout not found'
+            ], 404);
+        }
+    
+        
+        $workout->delete();
+    
+       
+        return response()->json([
+            'status' => true,
+            'message' => 'Workout deleted successfully'
+        ], 200);
     }
 }
