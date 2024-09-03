@@ -24,6 +24,15 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
+
+        if (!in_array(auth()->user()->role, ['admin', 'trainer'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin and trainer can access this section.'
+            ], 403);
+        }
+
+
         $validator = Validator::make($request->all(), [
             'member_id' => 'required|integer|exists:users,id', 
             'workout_id' => 'required|integer|exists:workouts,id', 
@@ -52,14 +61,24 @@ class AttendanceController extends Controller
  
     public function update(Request $request, string $id)
     {
+
+
+        if (!in_array(auth()->user()->role, ['admin', 'trainer'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin and trainer can access this section.'
+            ], 403);
+        }
+
+
         $attendance = Attendance::find($id);
 
-        // Check if the attendance record exists
+        
         if (!$attendance) {
             return response()->json(['message' => 'Attendance record not found'], 404);
         }
 
-        // Validate the request data
+       
         $validator = Validator::make($request->all(), [
             'member_id' => 'required|integer|exists:users,id',
             'workout_id' => 'required|integer|exists:workouts,id',
@@ -70,10 +89,10 @@ class AttendanceController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // Update the attendance record with the validated data
+        
         $attendance->update($request->only(['member_id', 'workout_id', 'attended_at']));
 
-        // Return a success response
+       
         return response()->json([
             'status'=>true,
             'message' => 'Attendance record updated successfully',
@@ -83,7 +102,14 @@ class AttendanceController extends Controller
 
     public function destroy(string $id)
     {
-       
+        if (!in_array(auth()->user()->role, ['admin', 'trainer'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin and trainer can access this section.'
+            ], 403);
+        }
+
+        
         $attendance = Attendance::find($id);
 
        

@@ -11,12 +11,26 @@ class MemberMembershipController extends Controller
    
     public function index()
     {
+        if (auth()->user()->role !== 'admin') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin can access this section.'
+            ], 403);
+        }
+
         $memberMemberships = MemberMembership :: all();
         return response()->json ($memberMemberships);
     }
 
     public function store(Request $request)
     {
+
+        if (auth()->user()->role !== 'admin') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin can access this section.'
+            ], 403);
+        }
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
@@ -43,6 +57,15 @@ class MemberMembershipController extends Controller
  
     public function update(Request $request, string $id)
     {
+
+        if (auth()->user()->role !== 'admin') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin can access this section.'
+            ], 403);
+        }
+
+        
          $memberMembership = MemberMembership::find($id);
 
         
@@ -50,7 +73,7 @@ class MemberMembershipController extends Controller
             return response()->json(['message' => 'Member membership record not found'], 404);
         }
 
-        // Validate the request data
+        
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer|exists:users,id',
             'membership_id' => 'required|integer|exists:memberships,id',
@@ -63,10 +86,9 @@ class MemberMembershipController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // Update the member membership record 
         $memberMembership->update($request->all());
 
-        // Return a success response
+        
         return response()->json([
             'status' => true,
             'message' => 'Member membership record updated successfully',
@@ -76,6 +98,15 @@ class MemberMembershipController extends Controller
 
     public function destroy(string $id)
     {
+
+        if (auth()->user()->role !== 'admin') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin can access this section.'
+            ], 403);
+        }
+
+        
         $memberMembership = MemberMembership::find($id);
 
         if (!$memberMembership) {

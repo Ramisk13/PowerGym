@@ -22,6 +22,13 @@ class MembershipController extends Controller
    
     public function store(Request $request)
     {
+        if (auth()->user()->role !== 'admin') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin can access this section.'
+            ], 403);
+        }
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -52,6 +59,14 @@ class MembershipController extends Controller
    
     public function update(Request $request, string $id)
     {
+
+        if (auth()->user()->role !== 'admin') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin can access this section.'
+            ], 403);
+        }
+
         $membership = Membership::find($id);
 
         
@@ -97,6 +112,14 @@ class MembershipController extends Controller
 
     public function destroy(string $id)
     {
+
+        if (auth()->user()->role !== 'admin') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin can access this section.'
+            ], 403);
+        }
+        
         $membership = Membership::find($id);
 
         

@@ -24,6 +24,14 @@ class TrainerAssignmentController extends Controller
 
     public function store(Request $request)
     {
+
+        if (!in_array(auth()->user()->role, ['admin', 'trainer'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin and trainer can access this section.'
+            ], 403);
+        }
+
         $validator = Validator::make($request->all(), [
             'trainer_id' => [
                 'required',
@@ -36,7 +44,7 @@ class TrainerAssignmentController extends Controller
                     }
                 },
             ],
-            'workout_id' => 'required|exists:workouts,id', // Adjust based on your actual table
+            'workout_id' => 'required|exists:workouts,id', 
         ]);
 
         if ($validator->fails()) {
@@ -50,7 +58,7 @@ class TrainerAssignmentController extends Controller
             'workout_id' => $request->workout_id,
         ]);
 
-        // Return a success response
+        
         return response()->json([
             'status'=>true,
             'message' => 'Trainer assignment created successfully',
@@ -65,6 +73,15 @@ class TrainerAssignmentController extends Controller
 
     public function update(Request $request, string $id)
     {
+
+        if (!in_array(auth()->user()->role, ['admin', 'trainer'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin and trainer can access this section.'
+            ], 403);
+        }
+
+
         $validator = Validator::make($request->all(), [
             'trainer_id' => [
                 'required',
@@ -94,12 +111,12 @@ class TrainerAssignmentController extends Controller
         ], 404);
     }
 
-    // Update the record with new values
+    
     $trainerAssignment->trainer_id = $request->trainer_id;
     $trainerAssignment->workout_id = $request->workout_id;
     $trainerAssignment->save();
 
-    // Return a success response
+    
     return response()->json([
         'status' => true,
         'message' => 'Trainer assignment updated successfully',
@@ -112,6 +129,14 @@ class TrainerAssignmentController extends Controller
 
     public function destroy(string $id)
     {
+
+        if (!in_array(auth()->user()->role, ['admin', 'trainer'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin and trainer can access this section.'
+            ], 403);
+        }
+        
         $trainerAssignment = TrainerAssignment::find($id);
 
         if (!$trainerAssignment) {

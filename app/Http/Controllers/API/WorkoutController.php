@@ -23,7 +23,13 @@ class WorkoutController extends Controller
     public function store(Request $request)
     {
 
-        
+        if (!in_array(auth()->user()->role, ['admin', 'trainer'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin and trainer can access this section.'
+            ], 403);
+        }
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -57,7 +63,12 @@ class WorkoutController extends Controller
     public function update(Request $request, string $id)
     {
        
-    
+        if (!in_array(auth()->user()->role, ['admin', 'trainer'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin and trainer can access this section.'
+            ], 403);
+        }
         
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|required|string|max:255',
@@ -99,6 +110,13 @@ class WorkoutController extends Controller
     
     public function destroy(string $id)
     {
+
+        if (!in_array(auth()->user()->role, ['admin', 'trainer'])) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthorized. Only admin and trainer can access this section.'
+            ], 403);
+        }
        
         $workout = Workout::find($id);
     
