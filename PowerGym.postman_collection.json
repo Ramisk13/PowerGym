@@ -1,0 +1,663 @@
+{
+	"info": {
+		"_postman_id": "f6629bcc-c860-4836-897d-02c9e3ea85ea",
+		"name": "PowerGym",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37429693"
+	},
+	"item": [
+		{
+			"name": "Attendances",
+			"item": [
+				{
+					"name": "List the attendance",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Make a new attendance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"member_id\":\"4\",\r\n    \"workout_id\":\"8\",\r\n    \"attended_at\":\"2024-07-16 15:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/attendances",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"attendances"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an attendance",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an attendance",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/attendances/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"attendances",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MemberMemberships",
+			"item": [
+				{
+					"name": "List all memberMemberships",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/memberMemberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"memberMemberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add a new memberMembership",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update a memberMembership",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/memberMemberships/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"memberMemberships",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a memberMembership",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/memberMemberships/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"memberMemberships",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Memberships",
+			"item": [
+				{
+					"name": "Show all memberships",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"memberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new Membership",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gold Membership\",\r\n    \"description\": \"Access to all premium facilities\",\r\n    \"duration_in_months\": 12,\r\n    \"price\": 299.99\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/memberships",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"memberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a membership",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated Gold Membership\",\r\n    \"description\": \"Updated description\",\r\n    \"duration_in_months\": 12,\r\n    \"price\": 349.99\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/memberships/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"memberships",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a membership",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/memberships/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"memberships",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TrainerAssignments",
+			"item": [
+				{
+					"name": "List all Trainer/assignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/trainerAssignments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"trainerAssignments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new Trainer/Assignment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"trainer_id\":2,\r\n    \"workout_id\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/trainerAssignments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"trainerAssignments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Trainer/Assignment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"trainer_id\" : 6,\r\n    \"workout_id\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/trainerAssignments/10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"trainerAssignments",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Trainer/Assignment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/trainerAssignments/10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"trainerAssignments",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Workouts",
+			"item": [
+				{
+					"name": "List all workouts",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new workout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Full Body Strength\",\r\n    \"description\":\"A comprehensive workout focusing on all major muscle groups.\",\r\n    \"duration\":\"01:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/workouts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"workouts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a workout",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Full Body Strength\",\r\n    \"description\":\"A comprehensive workout focusing on all major muscle groups.\",\r\n    \"duration\":\"01:30:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/workouts/7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"workouts",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a workout",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/workouts/7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"workouts",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Rami\",\r\n    \"email:\":\"202210461@ua.edu.lb\",\r\n    \"role\":\"trainer\",\r\n    \"phone\":\"70235369\",\r\n    \"password\":\"Rami70235369\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log In",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Log out",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "List all users",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new user",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update a user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 4|SJi9UEpQG2XrZszeeovxSj7Njfp6wep3sCCluVw48fc788fc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\":\"member\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/users/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 4|SJi9UEpQG2XrZszeeovxSj7Njfp6wep3sCCluVw48fc788fc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/users/7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
